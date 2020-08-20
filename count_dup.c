@@ -18,15 +18,43 @@
 
 
 #include <stdio.h>
+#include <limits.h>
+#include <ctype.h>
+
+void debug(){
+	printf("CHAR_MIN: %d\n", CHAR_MIN );  // -128
+	printf("CHAR_MAX: %d\n", CHAR_MAX );  //  127
+	printf("UCHAR_MAX: %d\n", UCHAR_MAX );  //  127
+}
+
+void show_score(char *stat){
+	for (int c = CHAR_MIN;c <= CHAR_MAX; c++){
+		int this = c+128;
+		char cprint = '-';
+		if (ispunct(c) || isalnum(c))
+			cprint = c;
+		if (stat[this])
+			printf("char(%4d) | 0x%02x | %1c | count -> %2d\n", c, (char)c & 0xff, cprint ,stat[this]);
+	}
+}
+
+void score(char *tbc, char *stat){
+	for (int c = 0;tbc[c] != '\0'; c++)
+		stat[tbc[c]+CHAR_MAX+1]+=1;
+}
 
 int main(){
 
-	char tbc[] = "this is some array12334455";   // to be checked
-	char stat[sizof(char)] = {0};
+	debug();
 
-	printf("fffffffffffff: %ld\n", sizeof(char));
+	char tbc[] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAthis is some array12334455";   // to be checked
+	char stat[UCHAR_MAX] = {0};
 
-	printf("tbc: %s\n", tbc);
+	printf("tbc:  %s\n",  tbc);
+	printf("stat: %s\n", stat);
+
+	score(tbc, stat);
+	show_score(stat);
 
 	return 0;
 }
