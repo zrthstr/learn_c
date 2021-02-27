@@ -21,20 +21,21 @@ int main(){
 	ptr = (char* )calloc(max, sizeof(char));
 
 	for (int i=2; i <= max; i++){
-	// so much room for optimisation
-	//printf("i = %d\n",i);
-
+		if (ptr[i] == 1) { continue;}
 		for (int f=2; f*i <= max; f++){
 			//printf("fi = %d\n",f*i);
 			ptr[f*i] = 1;
 		}
-		
 	}
 
-	// show
-	//ptr[6] = 1;
-	for (int i=2; i <= max; i++){
-		if (!ptr[i])
-			printf("number: %d prime \n", i);
+	//for (int i=2; i <= max; i++){
+	//	if (!ptr[i])
+	//		printf("number: %d prime \n", i);
+	//}
+	
+	int count = 0;
+	for (int i = 2; i <= max; i++){
+		if (!ptr[i]) count += 1;
 	}
+	printf("count: %d\n", count);
 }
