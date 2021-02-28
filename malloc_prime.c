@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 int main(){
 
@@ -17,8 +18,9 @@ int main(){
 
 	// And there are approximately 203,118,205 prime numbers
 	// less than or equal to 4,294,967,295
-	char* ptr;
-	ptr = (char* )calloc(max, sizeof(char));
+	//char* ptr;
+	bool* ptr;
+	ptr = (bool* )calloc(max, sizeof(bool));
 
 	for (int i=2; i <= max; i++){
 		if (ptr[i] == 1) { continue;}
